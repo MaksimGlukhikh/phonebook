@@ -10,6 +10,7 @@ def print_contacts():
         contacts_str = file.read().rstrip().split('\n\n')
         for nn, contact in enumerate(contacts_str, 1):
             print(f'{nn}. {contact} \n')
+    return contacts_str
             
         
 # Функция поиска
@@ -34,6 +35,7 @@ def search_contact():
             print(f'\n {contact_str} \n')
             print()
             
+# Функция получения пользовательского ввода для добавления контакта
 
 def create_contact():
     
@@ -44,9 +46,23 @@ def create_contact():
     adress = address_input()
     return f'{surname} {name} {patronymic} {phone}\n{adress}\n\n'
 
+# Функция записи нового контакта в файл
 
 def write_contact():
     contact = create_contact()
     with open('phonebook.txt', 'a', encoding='utf-8') as file:
         file.write(contact)
         print('\n Контакт добавлен! \n')
+        
+# Функция копирования контакта в новый файл
+        
+def copy_contact ():
+    contacts_str = print_contacts()
+    index_contact = int(input('Контакт из какой строки скопировать?: '))
+    print()
+    for nn, contact in enumerate(contacts_str, 1):
+        if index_contact == nn:
+            print(f'Контакт:   "{nn}. {contact}" скопирован!\n')
+            with open('newbook.txt', 'a', encoding='utf-8') as file:
+                file.write(f'{contact} \n')
+            file.close()
